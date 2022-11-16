@@ -1,4 +1,4 @@
-running
+== running
 
 ----
 mvn -PnativeTest,hateoas
@@ -8,10 +8,35 @@ gives
 
 java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
 
-removing hateoas
+
+
+== removing hateoas
 
 ----
 mvn -PnativeTest
 ----
 
 still fails as it tries to generate a proxy
+
+----
+java.lang.UnsupportedOperationException: Defining new classes at runtime is not supported
+        at org.graalvm.nativeimage.builder/com.oracle.svm.core.util.VMError.unimplemented(VMError.java:98) ~[na:na]
+        at java.base@17.0.5/java.lang.invoke.MethodHandles$Lookup.defineClass(MethodHandles.java:46) ~[native-tests:na]
+        at org.springframework.cglib.core.ReflectUtils.defineClass(ReflectUtils.java:466) ~[na:na]
+        at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:367) ~[native-tests:6.0.0]
+        at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:580) ~[na:na]
+        at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:110) ~[na:na]
+        at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:108) ~[na:na]
+        at org.springframework.cglib.core.internal.LoadingCache$2.call(LoadingCache.java:55) ~[na:na]
+        at java.base@17.0.5/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[native-tests:na]
+        at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:62) ~[na:na]
+        at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:35) ~[na:na]
+        at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:134) ~[na:na]
+        at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:319) ~[native-tests:6.0.0]
+        at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:567) ~[na:na]
+        at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:412) ~[na:na]
+        at org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder$ControllerMethodInvocationInterceptor.initProxy(MvcUriComponentsBuilder.java:792) ~[na:na]
+        at org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.controller(MvcUriComponentsBuilder.java:383) ~[na:na]
+        at org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on(MvcUriComponentsBuilder.java:358) ~[na:na]
+        at com.example.mcvuri.McvuriApplication$Controller2.post(McvuriApplication.java:48) ~[native-tests:na]
+----
