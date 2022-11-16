@@ -16,10 +16,6 @@ class McvuriApplicationTests {
 		client.post().uri("/api1").exchange().expectStatus().isCreated();
 	}
 
-	@Test
-	void testPostWithProxy(@Autowired WebTestClient client) {
 
-		client.post().uri("/api2").exchange().expectStatus().isCreated();
-	}
 
 }

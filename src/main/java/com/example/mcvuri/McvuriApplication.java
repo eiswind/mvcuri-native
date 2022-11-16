@@ -33,20 +33,5 @@ public class McvuriApplication {
 		}
 	}
 
-	@RestController
-	@RequestMapping("/api2")
-	static class Controller2 {
 
-		@GetMapping("/{path}")
-		ResponseEntity<String> get(@PathVariable(name = "path") String path){
-			return ResponseEntity.ok("Hello "+path);
-		}
-
-
-		@PostMapping
-		ResponseEntity<Void> post(){
-			var uri = MvcUriComponentsBuilder.fromMethodCall(MvcUriComponentsBuilder.on(Controller2.class).get("test")).build();
-			return ResponseEntity.created(uri.toUri()).build();
-		}
-	}
 }
