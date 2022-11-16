@@ -1,0 +1,17 @@
+running
+
+----
+mvn -PnativeTest,hateoas
+----
+
+gives
+
+java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
+
+removing hateoas
+
+----
+mvn -PnativeTest
+----
+
+still fails as it tries to generate a proxy
